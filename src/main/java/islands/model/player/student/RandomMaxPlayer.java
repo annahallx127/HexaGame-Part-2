@@ -1,6 +1,8 @@
 package islands.model.player.student;
 
 import islands.model.GameModel;
+import islands.model.Move;
+import islands.model.RowColPair;
 import islands.model.TileColor;
 import islands.model.player.MinimaxPlayer;
 
@@ -24,9 +26,25 @@ public class RandomMaxPlayer extends MinimaxPlayer {
     // Because this only does the opponent move, it does not need to provide a move, just a value.
     @Override
     public double getOpponentValue(GameModel model, int depth, TileColor tileColor) {
-        // TODO: Handle the base cases.
+        if (depth < 0) {
+            throw new IllegalArgumentException();
+        }
 
-        // TODO: Compute and return the average of the child node values.
-        return 0.0;
+        if (depth == 0 || model.isGameOver()) {
+            return getValue(model, tileColor.getOpposite());
+        }
+
+        double childSum = 0;
+        for (RowColPair position : getLegalPositions(model)) {
+            GameModel childModel = model.deepCopy();
+            childModel.makePlay(position.row(), position.column(), tileColor);
+            Move childMove = getMyMove(childModel, depth - 1, tileColor.getOpposite());
+
+            double minValue = childMove.value();
+            childSum += minValue;
+
+        }
+        return childSum / getLegalPositions(model).size();
     }
 }
+

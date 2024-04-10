@@ -1,6 +1,9 @@
 package islands.model.player;
 
+import islands.model.*;
+
 import islands.model.GameModel;
+import islands.model.Move;
 import islands.model.RowColPair;
 import islands.model.TileColor;
 
@@ -55,4 +58,5 @@ public class RandomPlayer extends SimulatedPlayer {
         // called unless there was an empty cell.
         throw new RuntimeException("Unreachable code run.");
     }
+
 }

@@ -60,6 +60,7 @@ public class MinimaxPlayer extends SimulatedGameTreePlayer {
             throw new IllegalArgumentException();
         }
 
+
         // In this case, we should not investigate any moves, so we just
         // construct and return an instance of Move that has the estimated
         // value but no position.
