@@ -16,10 +16,12 @@ public class TranspositionTable {
 
     private final Map<String, CachedInfo> cachedMoves = new HashMap<>();
 
+
     /**
      * Constructs an empty transposition table.
      */
     public TranspositionTable() {
+
     }
 
     /**
@@ -32,27 +34,25 @@ public class TranspositionTable {
      * @param move  the move
      */
     public void putMove(GameModel model, int depth, Move move) {
-        // Make an addition to the hash table.
-        // The key should be the model's board string.
-        // The value should be an instance of Value with the depth and move.
-
-        // Add the transformed board and move to the hash table.
+        String key = model.getBoardString();
+        CachedInfo cache = new CachedInfo(depth, move);
+        cachedMoves.put(key, cache);
+        putTransformation(model.getSize(), key, cache);
+        //samy helped this section
     }
 
     // Adds entry for the board rotated 180 degrees.
     private void putTransformation(int size, String boardString, CachedInfo cachedInfo) {
-        // Generate the board string of the 180-degree rotation of
-        // the current model, using its board string. While board strings
-        // are not arrays, you can get any row and column position of
-        // boardString by calling the helper method getTileChar().
+        String emptyBoardString = "";
 
-        // You will have to build up the other board string one character
-        // at a time using the translation formula provided on Canvas:
-        //   (row, col) ---> (size - 1 - row, size - 1 - col)
-        // Don't forget to add a newline character at the end of each row.
-
-        // In addition to transforming the board, you need to use the same formula
-        // to translate the move. Add the new board and move to the hash table.
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++ ) {
+                char tileChar  = getTileChar(size, boardString, size - 1 - row, size - 1 - col);
+                emptyBoardString += tileChar;
+            }
+            emptyBoardString += "\n";
+        }
+        cachedMoves.put(emptyBoardString, cachedInfo);
     }
 
     private static char getTileChar(int size, String boardString, int row, int col) {
@@ -70,9 +70,10 @@ public class TranspositionTable {
      * @return true if a move is available, false otherwise
      */
     public boolean hasMove(GameModel model, int depth) {
-        // Check if the hash table has an entry with the model's board string as the key
-        // and that the associated value includes a depth greater than or equal
-        // to the passed depth.
+        String key = model.getBoardString();
+        if (cachedMoves.containsKey(key) && cachedMoves.get(key).depth <= depth){
+            return true;
+        }
         return false;
     }
 
@@ -89,7 +90,11 @@ public class TranspositionTable {
      *                                requested depth
      */
     public Move getMove(GameModel model, int depth) {
-        // TODO: Implement.
-        return null;
+        if (!hasMove(model, depth)) {
+            throw new NoSuchElementException();
+        }
+        
+        String key = model.getBoardString();
+        return cachedMoves.get(key).move();
     }
 }
