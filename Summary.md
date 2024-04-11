@@ -18,9 +18,6 @@ CatchingMinimaxPlayer do not give the same results as MinimaxPlayer. MiniMax had
 5 s,while MinimaxPlayer had 42,479,793 μs 42,479 ms42 s as the result. Therefore, caching minimax is better because 
 it had the lower time, us and ms. 
 
-Minimax and Random 
-RandomMax and Random
-CachingMinimax and Random
 
 #### What is the timing output for the specified pairs of simulators on a size-3 board?
 Minimax and Random
@@ -32,11 +29,28 @@ Time used by RandomMax (White): 55,751 μs	55 ms	0 s
 Time used by Random (Black): 51 μs	0 ms	0 s
 
 CachingMinimax and Random
-
+Time used by Caching Minimax (White): 67,066 μs	67 ms	0 s
+Time used by Random (Black): 82 μs	0 ms	0 s
 
 ### Milestone 4
 
 ####  What is the timing output when you run the following pairs of simulators on a size-5 board?
+
+Minimax and Random
+Time used by Minimax (White): 56,290,630 μs	56,290 ms	56 s
+Time used by Random (Black): 172 μs	0 ms	0 s
+
+RandomMax and Random
+Time used by RandomMax (White): 54,287,749 μs	54,287 ms	54 s
+Time used by Random (Black): 76 μs	0 ms	0 s
+
+CachingMinimax and Random
+Time used by Caching Minimax (White): 5,594,532 μs	5,594 ms	5 s
+Time used by Random (Black): 164 μs	0 ms	0 s
+
+AlphaBeta and Random
+Time used by Alpha-Beta (White): 56,970,044 μs	56,970 ms	56 s
+Time used by Random (Black): 187 μs	0 ms	0 s
 
 ## Summary questions
 
@@ -74,6 +88,8 @@ Peer TA Samyutha helped us better understand the putMove() implementation in the
 
 _Please give specific URLs/questions (not just "Stack Overflow" or "ChatGPT") and
 state which ones were particularly helpful._ [1 point]
+https://www.javatpoint.com/alpha-beta-pruning-java#:~:text=Alpha%2Dbeta%20pruning%20is%20a,or%20tic%2Dtac%2Dtoe.
+^ used the source to learn more about alpha beta pruning
 
 ### Reflections
 

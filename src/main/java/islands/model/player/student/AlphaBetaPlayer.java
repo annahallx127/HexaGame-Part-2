@@ -46,14 +46,34 @@ public class AlphaBetaPlayer extends MinimaxPlayer {
         return getOpponentValue(model, depth, -Double.MAX_VALUE, Double.MAX_VALUE, tileColor);
     }
 
-    // This doesn't override the ordinary getMyMove() method because it adds
-    // alpha and beta parameters.
     private Move getMyMove(GameModel model, int depth, double alpha, double beta, TileColor tileColor) {
-        return null; // TODO: Implement.
+        if (depth < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (depth == 0 || model.isGameOver()) {
+            return new Move(getValue(model, tileColor));
+        }
+        double maxValue = -Double.MAX_VALUE;
+        Move bestMove = null;
+        for (RowColPair position : getLegalPositions(model)) {
+            GameModel newModel = model.deepCopy();
+            newModel.makePlay(position.row(), position.column(), tileColor);
+            double childValue = getOpponentValue(newModel, depth - 1, alpha, beta, tileColor.getOpposite());
+
+            maxValue = Math.max(maxValue, childValue);
+            alpha = Math.max(alpha, maxValue);
+
+            if (maxValue >= beta) {
+                return new Move(position.row(), position.column(), childValue);
+            }
+
+            if (bestMove == null || childValue > bestMove.value()) {
+                bestMove = new Move(position.row(), position.column(), childValue);
+            }
+        }
+        return bestMove;
     }
 
-    // This doesn't override the ordinary getMyMove() method because it adds
-    // alpha and beta parameters.
     private double getOpponentValue(GameModel model, int depth, double alpha, double beta, TileColor tileColor) {
         return 0.0; // TODO: Implement.
     }
