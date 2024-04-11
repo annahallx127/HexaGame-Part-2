@@ -38,10 +38,8 @@ public class TranspositionTable {
         CachedInfo cache = new CachedInfo(depth, move);
         cachedMoves.put(key, cache);
         putTransformation(model.getSize(), key, cache);
-        //samy helped this section
     }
 
-    // Adds entry for the board rotated 180 degrees.
     private void putTransformation(int size, String boardString, CachedInfo cachedInfo) {
         String emptyBoardString = "";
 

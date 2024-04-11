@@ -47,6 +47,8 @@ Rather than giving ranges, if you are unsure, give the averages of the ranges._
 
 _Discussing the assignment with people not on your team is fine as long as you
 don't share code. Be sure to state how you worked together_ [1 points]
+Peer TA Samyutha helped us better understand the putMove() implementation in the TranspositionTable class
+
 
 ### What resources did you use?
 
