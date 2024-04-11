@@ -75,6 +75,28 @@ public class AlphaBetaPlayer extends MinimaxPlayer {
     }
 
     private double getOpponentValue(GameModel model, int depth, double alpha, double beta, TileColor tileColor) {
-        return 0.0; // TODO: Implement.
+        if (depth < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (depth == 0 || model.isGameOver()) {
+            return getValue(model, tileColor.getOpposite());
+        }
+        double minValue = Double.MAX_VALUE;
+        for (RowColPair position : getLegalPositions(model)) {
+            GameModel childModel = model.deepCopy();
+            childModel.makePlay(position.row(), position.column(), tileColor);
+            Move childMove = getMyMove(childModel, depth - 1, alpha, beta, tileColor.getOpposite());
+            if (childMove.value() < minValue) {
+                minValue = childMove.value();
+            }
+
+            minValue = Math.min(minValue, childMove.value());
+            alpha = Math.min(alpha, minValue);
+
+            if (beta <= alpha) {
+                break;
+            }
+        }
+        return minValue;
     }
 }

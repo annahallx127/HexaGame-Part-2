@@ -3,6 +3,7 @@ package islands;
 import islands.model.player.RandomPlayer;
 import islands.model.player.SimulatedPlayer;
 import islands.model.player.MinimaxPlayer;
+import islands.model.player.student.AlphaBetaPlayer;
 import islands.model.player.student.CachingMinimaxPlayer;
 import islands.model.player.student.RandomMaxPlayer;
 import islands.view.Game;
@@ -23,7 +24,8 @@ public final class GameDriver {
             RandomPlayer.class,
             MinimaxPlayer.class,
             RandomMaxPlayer.class,
-            CachingMinimaxPlayer.class
+            CachingMinimaxPlayer.class,
+            AlphaBetaPlayer.class
     );
 
     /**
