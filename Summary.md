@@ -14,8 +14,25 @@ _These two questions are worth a total of 4 points._
 ### Milestone 3
 
 #### Should CachingMinimaxPlayer give the same results as MinimaxPlayer or better ones? Explain.
+CatchingMinimaxPlayer do not give the same results as MinimaxPlayer. MiniMax had the results of 5,406,266 μs 5,406 ms	
+5 s,while MinimaxPlayer had 42,479,793 μs 42,479 ms42 s as the result. Therefore, caching minimax is better because 
+it had the lower time, us and ms. 
+
+Minimax and Random 
+RandomMax and Random
+CachingMinimax and Random
 
 #### What is the timing output for the specified pairs of simulators on a size-3 board?
+Minimax and Random
+Time used by Minimax (White): 106,987 μs	106 ms	0 s
+Time used by Random (Black): 129 μs	0 ms	0 s
+
+RandomMax and Random
+Time used by RandomMax (White): 55,751 μs	55 ms	0 s
+Time used by Random (Black): 51 μs	0 ms	0 s
+
+CachingMinimax and Random
+
 
 ### Milestone 4
 
