@@ -13,6 +13,7 @@ import islands.model.player.MinimaxPlayer;
 public class CachingMinimaxPlayer extends MinimaxPlayer {
 
     private final TranspositionTable transpositionTable;
+
     /**
      * Constructs a caching minimax player.
      */
@@ -27,16 +28,12 @@ public class CachingMinimaxPlayer extends MinimaxPlayer {
 
     @Override
     public Move getMyMove(GameModel model, int depth, TileColor tileColor) {
-        String key = model.getBoardString();
-// idk why red
-        if (transpositionTable.containsKey(key)) {
-            return transpositionTable.get(key);
+        if (transpositionTable.hasMove(model, depth)) {
+            return transpositionTable.getMove(model, depth);
         } else {
             Move move = super.getMyMove(model, depth, tileColor);
-            transpositionTable.put(key, move);
+            transpositionTable.putMove(model, depth, move);
             return move;
         }
-
-
     }
 }

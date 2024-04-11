@@ -27,6 +27,9 @@ _These two questions are worth a total of 4 points._
 
 _Give the usernames of all teammates and the HTTPS URL of the repository page so we can view
 it in a browser._ [1 point]
+annahallx127
+ItzGhozt
+https://github.com/orgs/Fundies-2-Oakland/teams/anna-isabel-10/repositories
 
 ## Did you successfully implement everything that was requested, and does everything work,
 to the best of your knowledge? This includes autograder tests.
