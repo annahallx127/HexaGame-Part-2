@@ -44,13 +44,17 @@ public class TranspositionTable {
         String emptyBoardString = "";
 
         for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++ ) {
-                char tileChar  = getTileChar(size, boardString, size - 1 - row, size - 1 - col);
+            for (int col = 0; col < size; col++) {
+                char tileChar = getTileChar(size, boardString, size - 1 - row, size - 1 - col);
                 emptyBoardString += tileChar;
             }
             emptyBoardString += "\n";
         }
-        cachedMoves.put(emptyBoardString, cachedInfo);
+
+        Move rotatedMove = new Move(size - 1  - cachedInfo.move.row(),
+                size - 1 - cachedInfo.move.col(), cachedInfo.move().value());
+
+        cachedMoves.put(emptyBoardString, new CachedInfo((int) cachedInfo.move().value(), rotatedMove));
     }
 
     private static char getTileChar(int size, String boardString, int row, int col) {
@@ -69,7 +73,7 @@ public class TranspositionTable {
      */
     public boolean hasMove(GameModel model, int depth) {
         String key = model.getBoardString();
-        if (cachedMoves.containsKey(key) && cachedMoves.get(key).depth <= depth){
+        if (cachedMoves.containsKey(key) && cachedMoves.get(key).depth >= depth) {
             return true;
         }
         return false;
@@ -91,7 +95,7 @@ public class TranspositionTable {
         if (!hasMove(model, depth)) {
             throw new NoSuchElementException();
         }
-        
+
         String key = model.getBoardString();
         return cachedMoves.get(key).move();
     }
